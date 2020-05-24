@@ -5,17 +5,20 @@ import javax.swing.*;
 
 public class Screen extends GameObject
 {
-	// ClassLoader cl;				//class loader
+	ClassLoader cl;				//class loader
 	BufferedImage img;
 	boolean visualize;			//to display img or not
 	int x;
 	int y;
 	public Screen(String s1, String s2, int xcoord, int ycoord)			//s1 is foler in same directory as project												
-	{											//s2 is name of img file with extension
-		img = MarioWindow.getImage(s1+"/"+s2);
+	{
+		//s1 is directory name
+		//s2 is name of img file *with* extension
+		
+		// img = MarioWindow.getImage(s1+"/"+s2);	//original
 
-		// cl = this.getClass().getClassLoader();
-		// img = cl.getResource(s1+"/"+s2);
+		cl = this.getClass().getClassLoader();						//testing
+		img = MarioWindow.getImage(cl.getResource(s1+"/"+s2));		//testing
 
 		x = xcoord;
 		y = ycoord;
@@ -26,7 +29,7 @@ public class Screen extends GameObject
 		if (visualize) 
 		{
 			g.drawImage(img,x,y,null);
-			// g.setFont(new Font("Power Clear", Font.PLAIN, 14)); //if text is needed, use this font
+			//if text is needed, use Power Clear
 		}
 	}
 }
