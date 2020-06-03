@@ -1,5 +1,5 @@
 /*
-	MarioWindow2.java is a nice program that allows you to create
+	MarioWindow.java is a nice program that allows you to create
 	graphical threaded applications without having to learn specifics
 	about java awt and java swing. I made this so you guys
 	can concentrate on working on threads rather than graphics.
@@ -10,6 +10,7 @@
 	v.1.1 - Just a basic hack
 	v.1.2 - Learned double buffering! http://www.gamedev.net/page/resources/_/reference/programming/languages/java/java-games-active-rendering-r2418
 	v.1.3 - Mouse clicks (thanks Jet Magbanua and Mark Enriquez!) and GIF (thanks Justin Asuncion!)
+	v.1.4 - Allows for loading of images in wilst in a jarfile. Thank you to Isaiah Rae Dy-Liacco for this suggestion
 */
 
 
@@ -246,8 +247,8 @@ public class MarioWindow extends JFrame implements MouseListener, MouseMotionLis
 
 	public static BufferedImage getImage(String filename) {
 		try {
-			File fp = new File(filename);
-			BufferedImage img = ImageIO.read(fp);
+			BufferedImage img = ImageIO.read(MarioWindow.class.getClassLoader().getResource(filename));
+			
 			return img;
 		} catch (Exception e) {
 			System.out.println("Unable to read file: " + filename);
@@ -257,7 +258,8 @@ public class MarioWindow extends JFrame implements MouseListener, MouseMotionLis
 	
 	public static ImageIcon getGif(String filename) {
 		try {
-			ImageIcon icon = new ImageIcon(filename);
+			
+			ImageIcon icon = new ImageIcon(MarioWindow.class.getClassLoader().getResource(filename));
 			return icon;
 		} catch (Exception e) {
 			System.out.println("Unable to read file: " + filename);
