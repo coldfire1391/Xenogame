@@ -5,7 +5,6 @@ import javax.swing.*;
 
 public class Screen extends GameObject
 {
-	ClassLoader cl;				//class loader
 	BufferedImage img;
 	boolean visualize;			//to display img or not
 	int x;
@@ -14,15 +13,10 @@ public class Screen extends GameObject
 	{
 		//s1 is directory name
 		//s2 is name of img file *with* extension
-		
-		// img = MarioWindow.getImage(s1+"/"+s2);	//original
-
-		cl = this.getClass().getClassLoader();						//testing
-		img = MarioWindow.getImage(cl.getResource(s1+"/"+s2));		//testing
-
+		img = MarioWindow.getImage(s1+"/"+s2);	//original
+		visualize = false;
 		x = xcoord;
 		y = ycoord;
-		visualize = false;
 	}
 	public void paint(Graphics2D g)
 	{
